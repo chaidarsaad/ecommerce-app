@@ -23,10 +23,10 @@
                                 <input type="password" class="form-control" />
                             </div>
                             <a class="btn btn-success btn-block mt-4" href="/login.html">
-                                Login Now
+                                Masuk
                             </a>
                             <a class="btn btn-signup btn-block mt-2" href="{{ route('register') }}">
-                                Back to Register
+                                Kembali ke halaman Daftar
                             </a>
                         </form>
                     </div>

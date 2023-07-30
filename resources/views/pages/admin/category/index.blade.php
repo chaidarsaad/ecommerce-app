@@ -34,15 +34,57 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('category.create') }}" class="btn btn-primary">
+                    {{-- <a href="{{ route('category.create') }}" class="btn btn-primary">
                         Tambah Category Baru
-                    </a>
+                    </a> --}}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalcreate">
+                        Tambah Kategori Baru
+                    </button>
+                    <div class="modal fade text-left" id="modalcreate" tabindex="-1" role="dialog"
+                        aria-labelledby="myModalLabel33" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel33">Tambah kategori Baru</h4>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </div>
+                                <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <label>Nama Kategori</label>
+                                        <div class="form-group">
+                                            <input name="name" type="text" placeholder="Nama Kategori"
+                                                class="form-control" required>
+                                        </div>
+                                        <label>Foto Kategori</label>
+                                        <div class="form-group">
+                                            <input type="file" name="photo" placeholder="Foto Kategori"
+                                                class="form-control" accept="image/*" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                            <i class="bx bx-x d-block d-sm-none"></i>
+                                            <span class="d-none d-sm-block">Batal</span>
+                                        </button>
+
+                                        <button type="submit" class="btn btn-primary ml-1" >
+                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                            <span class="d-none d-sm-block">Simpan</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table" id="table1">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                {{-- <th>No</th> --}}
                                 <th>Nama</th>
                                 <th>Photo</th>
                                 <th>Aksi</th>
@@ -53,7 +95,7 @@
                             @foreach ($categories as $item)
                                 <tr>
                                     {{-- <th>{{ $item->id }}</th> --}}
-                                    <th>{{ $no++ }}</th>
+                                    {{-- <th>{{ $no++ }}</th> --}}
                                     <th>{{ $item->name }}</th>
                                     <th>
                                         <img src="{{ Storage::url($item->photo) }}" style="max-height: 40px;" />
@@ -67,7 +109,7 @@
                                                     Aksi
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                                    <a class="dropdown-item" href="{{ route('category.edit', $item->id) }}">
+                                                    <a  class="dropdown-item" href="{{ route('category.edit', $item->id) }}">
                                                         Sunting
                                                     </a>
                                                     <form action="{{ route('category.destroy', $item->id) }}"

@@ -12,7 +12,7 @@
                         </h2>
                         <form class="mt-3">
                             <div class="form-group">
-                                <label>Full Name</label>
+                                <label>Nama Lengkap</label>
                                 <input type="text" class="form-control is-valid" aria-describedby="nameHelp"
                                     v-model="name" autofocus />
                             </div>
@@ -27,10 +27,10 @@
                             </div>
 
                             <button type="submit" class="btn btn-success btn-block mt-4">
-                                Register Now
+                                Daftar
                             </button>
                             <a href="{{ route('login') }}" class="btn btn-signup btn-block mt-2">
-                                Back to Login
+                                Kembali ke halaman Login
                             </a>
                         </form>
                     </div>
