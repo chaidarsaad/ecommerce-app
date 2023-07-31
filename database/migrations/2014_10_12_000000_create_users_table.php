@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
-            $table->string('roles')->default('USER'); 
+            $table->string('roles')->default('USER');
 
             $table->softDeletes();
             $table->rememberToken();

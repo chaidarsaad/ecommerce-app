@@ -16,14 +16,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Category</h3>
-                    <p class="text-subtitle text-muted">List all categories</p>
+                    <h3>Foto Produk</h3>
+                    <p class="text-subtitle text-muted">List all Foto Produk</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin-dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                            <li class="breadcrumb-item active" aria-current="page">Produk Galeri</li>
                         </ol>
                     </nav>
                 </div>
@@ -35,31 +35,35 @@
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalcreate">
-                        Tambah Kategori Baru
+                        Tambah Foto Produk Baru
                     </button>
                     <div class="modal fade text-left" id="modalcreate" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel33" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel33">Tambah kategori Baru</h4>
+                                    <h4 class="modal-title" id="myModalLabel33">Tambah Produk Galeri Baru</h4>
                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <i data-feather="x"></i>
                                     </button>
                                 </div>
 
                                 {{-- modal --}}
-                                <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('gallery.store') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="modal-body">
-                                        <label>Nama Kategori</label>
+                                        <label>Produk</label>
                                         <div class="form-group">
-                                            <input name="name" type="text" placeholder="Nama Kategori"
-                                                class="form-control" required>
+                                            <select name="products_id" class="form-control" required>
+                                                <option value="">Pilih Produk</option>
+                                                @foreach ($products as $product)
+                                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                        <label>Foto Kategori</label>
+                                        <label>Foto Produk</label>
                                         <div class="form-group">
-                                            <input type="file" name="photo" placeholder="Foto Kategori"
+                                            <input type="file" name="photos" placeholder="Foto Produk"
                                                 class="form-control" accept="image/*" required>
                                         </div>
                                     </div>
@@ -67,7 +71,7 @@
                                         <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
                                             <span class="">Batal</span>
                                         </button>
-                                        <button type="submit" class="btn btn-primary ml-1">
+                                        <button id="top-center" type="submit" class="btn btn-primary ml-1">
                                             <span class="">Simpan</span>
                                         </button>
                                     </div>
@@ -83,20 +87,19 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>Photo</th>
+                                <th>Produk</th>
+                                <th>Foto</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php $no = 1; @endphp
-                            @foreach ($categories as $item)
+                            @foreach ($galleries as $item)
                                 <tr>
-                                    {{-- <th>{{ $item->id }}</th> --}}
                                     <th>{{ $no++ }}</th>
-                                    <th>{{ $item->name }}</th>
+                                    <th>{{ $item->product->name }}</th>
                                     <th>
-                                        <img src="{{ Storage::url($item->photo) }}" style="max-height: 40px;" />
+                                        <img src="{{ Storage::url($item->photos) }}" style="max-height: 80px;" />
                                     </th>
                                     <th>
                                         <div class="btn-group mb-1">
@@ -107,11 +110,7 @@
                                                     Aksi
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                                    <a class="dropdown-item" href="{{ route('category.edit', $item->id) }}">
-                                                        Sunting
-                                                    </a>
-                                                    <form action="{{ route('category.destroy', $item->id) }}"
-                                                        method="POST">
+                                                    <form action="{{ route('gallery.destroy', $item->id) }}" method="POST">
                                                         {{ method_field('delete') }}
                                                         {{ csrf_field() }}
                                                         <button class="dropdown-item text-danger" type="submit">
@@ -126,6 +125,14 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="col-12 col-md-4">
+                        <button
+                            id="top-center"
+                            class="btn btn-outline-primary btn-block btn-lg"
+                        >
+                            Top Center
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>

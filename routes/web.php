@@ -1,13 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
+use App\Models\ProductGallery;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\DashboardAccountController;
+use App\Http\Controllers\Admin\ProductGalleryController;
 use App\Http\Controllers\DashboardTransactionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -27,6 +30,8 @@ Route::get('/dashboard/accounts', [DashboardAccountController::class, 'index'])-
 Route::prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin-dashboard');
     Route::resource('category', CategoryController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('gallery', ProductGalleryController::class);
 });
 
 Auth::routes();
