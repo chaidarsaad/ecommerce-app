@@ -16,7 +16,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Produk</h3>
+                    <h3>Produk Galeri</h3>
                     <p class="text-subtitle text-muted">List all product gallery {{ $product->name }}</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
@@ -41,8 +41,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kategori</th>
-                                <th>Harga</th>
+                                <th>Foto</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -51,8 +50,9 @@
                             @foreach ($galleries as $item)
                                 <tr>
                                     <th>{{ $no++ }}</th>
-                                    {{-- <th>{{ $item->id }}</th></th> --}}
-                                    {{-- <th>Rp {{ number_format($item->price) }}</th> --}}
+                                    <th>
+                                        <img src="{{ Storage::url($item->photos) }}" style="max-height: 200px; max-width: 200px;" />
+                                    </th>
                                     <th>
                                         <div class="btn-group mb-1">
                                             <div class="dropdown">
