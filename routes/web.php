@@ -15,10 +15,16 @@ use App\Http\Controllers\CategoryController as ControllersCategoryController;
 use App\Http\Controllers\DashboardTransactionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/categories', [ControllersCategoryController::class, 'index'])->name('categories');
+Route::get('/categories/{id}', [ControllersCategoryController::class, 'detail'])->name('categories-detail');
+
 Route::get('/details/{id}', [DetailController::class, 'index'])->name('detail');
+
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
 Route::get('/success', [CartController::class, 'success'])->name('success');
+
 Route::get('/register/success', [RegisterController::class, 'success'])->name('register-success');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

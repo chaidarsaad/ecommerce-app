@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductRequest;
+use App\Models\ProductGallery;
 
 class ProductController extends Controller
 {
@@ -48,7 +49,14 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::with(['category'])->findOrFail($id);
+        $galleries = ProductGallery::where('product_id', $product->id);
+        // $galleries = ProductGallery::with(['product'])->findOrFail($id);
+
+        return view('pages.admin.product.gallery', [
+            'product' => $product,
+            'galleries' => $galleries
+        ]);
     }
 
     /**
