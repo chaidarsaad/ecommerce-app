@@ -72,8 +72,8 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item ">
-                    <a href="{{ route('category.index') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->is('admin/transaction') ? 'active' : '' }}">
+                    <a href="{{ route('transaction.index') }}" class='sidebar-link'>
                         <i class="bi bi-clipboard-fill"></i>
                         <span>Pesanan</span>
                     </a>

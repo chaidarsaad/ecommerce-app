@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::all();
+        $products = Product::orderBy('created_at', 'DESC')->get();
         return view('pages.admin.product.index', [
             'products' => $products,
             'categories' => $categories
@@ -56,15 +56,29 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = Product::with(['category'])->findOrFail($id);
+        $categories = Category::all();
+        
+        return view('pages.admin.product.edit',[
+            'item' => $item,
+            'categories' => $categories
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, string $id)
     {
-        //
+        $data = $request->all();
+
+        $item = Product::findOrFail($id);
+
+        $data['slug'] = Str::slug($request->name);
+
+        $item->update($data);
+
+        return redirect()->route('product.index');
     }
 
     /**

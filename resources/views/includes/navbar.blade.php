@@ -12,19 +12,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('home') }}">Beranda</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->is('categories') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('categories') }}">Kategori</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a class="nav-link" href="#">Favorit</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->is('register') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('register') }}">Daftar</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->is('login') ? 'active' : '' }}">
                     <a class="btn btn-success nav-link px-4 text-white" href="{{ route('login') }}">Masuk</a>
                 </li>
             </ul>

@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\ProductGallery;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
@@ -11,10 +10,12 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\DashboardAccountController;
 use App\Http\Controllers\Admin\ProductGalleryController;
+use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\CategoryController as ControllersCategoryController;
 use App\Http\Controllers\DashboardTransactionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+Route::get('/categories', [ControllersCategoryController::class, 'index'])->name('categories');
 Route::get('/details/{id}', [DetailController::class, 'index'])->name('detail');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/success', [CartController::class, 'success'])->name('success');
@@ -32,6 +33,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
     Route::resource('gallery', ProductGalleryController::class);
+    Route::resource('transaction', TransactionController::class);
 });
 
 Auth::routes();

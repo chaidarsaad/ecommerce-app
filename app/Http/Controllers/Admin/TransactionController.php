@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Product;
-use Illuminate\Http\Request;
-use App\Models\ProductGallery;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ProductGalleryRequest;
+use App\Models\Transaction;
+use Illuminate\Http\Request;
 
-class ProductGalleryController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $galleries = ProductGallery::orderBy('created_at', 'DESC')->get();
-        $products = Product::all();
-        return view('pages.admin.gallery.index', [
-            'galleries' => $galleries,
-            'products' => $products
+        $transaction = Transaction::all();
+        return view('pages.admin.transaction.index',[
+            'transaction' => $transaction
         ]);
     }
 
@@ -34,15 +30,9 @@ class ProductGalleryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductGalleryRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->all();
-
-        $data['photos'] = $request->file('photos')->store('assets/product', 'public');
-
-        ProductGallery::create($data);
-
-        return redirect()->route('gallery.index');
+        //
     }
 
     /**
@@ -72,11 +62,8 @@ class ProductGalleryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $item = ProductGallery::findorFail($id);
-        $item->delete();
-
-        return redirect()->route('gallery.index');
+        //
     }
 }

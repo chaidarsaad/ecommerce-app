@@ -125,14 +125,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="col-12 col-md-4">
-                        <button
-                            id="top-center"
-                            class="btn btn-outline-primary btn-block btn-lg"
-                        >
-                            Top Center
-                        </button>
-                    </div>
                 </div>
             </div>
         </section>

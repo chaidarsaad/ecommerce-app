@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="{{ route('home') }}" class="nav-link">BBeranda</a>
+                    <a href="{{ route('home') }}" class="nav-link">Beranda</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('categories') }}" class="nav-link">Kategori</a>
