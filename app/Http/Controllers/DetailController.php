@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,6 +36,22 @@ class DetailController extends Controller
             Cart::create($data);
 
             return redirect()->route('cart')->with('suksesadd', "Produk berhasil ditambahkan ke keranjangmu");
+        } catch (Exception $e) {
+            return back()->with('status', "Produk ini sudah ada di keranjangmu");
+        }
+    }
+
+    public function wishlist(Request $request, $id)
+    {
+        try {
+            $data = [
+                'products_id' => $id,
+                'users_id' => Auth::user()->id
+            ];
+
+            Wishlist::create($data);
+
+            return redirect()->route('wishlist')->with('suksesadd', "Produk berhasil ditambahkan ke keranjangmu");
         } catch (Exception $e) {
             return back()->with('status', "Produk ini sudah ada di keranjangmu");
         }

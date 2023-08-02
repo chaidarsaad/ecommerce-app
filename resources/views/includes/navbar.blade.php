@@ -25,8 +25,19 @@
                 <li class="nav-item {{ request()->is('categories') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('categories') }}">Kategori</a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="#">Favorit</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('wishlist') }}">
+
+                        @php
+                            $wishlists = \App\Models\Wishlist::where('users_id', Auth::user()->id)->count();
+                        @endphp
+                        @if ($wishlists > 0)
+                            <i class="fa-solid fa-heart fa-xl"></i>
+                            <div class="cart-badge">{{ $wishlists }}</div>
+                        @else
+                            <i class="fa-solid fa-heart fa-xl"></i>
+                        @endif
+                    </a>
                 </li>
                 @guest
                     <li class="nav-item">
@@ -61,7 +72,7 @@
                             </form>
                         </div>
                     </li>
-                    
+
                 </ul>
 
                 <ul class="navbar-nav d-block d-lg-none">

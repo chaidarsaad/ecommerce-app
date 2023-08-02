@@ -67,6 +67,13 @@
                                         Tambah ke keranjang
                                     </button>
                                 </form>
+                                <form action="{{ route('detail-wishlist', $product->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
+                                        Tambah ke Favorit
+                                    </button>
+                                </form>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-success px-4 text-white btn-block mb-3">
                                     Login untuk tambah ke keranjang
