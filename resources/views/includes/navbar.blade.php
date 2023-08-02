@@ -54,8 +54,8 @@
                 <ul class="navbar-nav d-none d-lg-flex">
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown">
-                            <img src="/images/icon-user.png" alt="" class="rounded-circle mr-2 profile-picture" />
                             Halo, {{ Auth::user()->name }}
+                            <img src="/images/icon-user.png" alt="" class="rounded-circle ml-3 profile-picture" />
                         </a>
                         <div class="dropdown-menu">
                             <a href="{{ route('dashboard') }}" class="dropdown-item">Dashboard</a>
