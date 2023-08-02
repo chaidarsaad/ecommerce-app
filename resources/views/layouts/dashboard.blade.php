@@ -30,17 +30,17 @@
                     </a>
                     <a href="{{ route('dashboard-transaction') }}"
                         class="list-group-item list-group-item-action {{ request()->is('dashboard/transactions*') ? 'active' : '' }}">
-                        Transactions
+                        Transaksi
                     </a>
                     <a href="{{ route('dashboard-account') }}"
                         class="list-group-item list-group-item-action {{ request()->is('dashboard/accounts*') ? 'active' : '' }}">
-                        My Account
+                        Akun Saya
                     </a>
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"
                         class="list-group-item list-group-item-action">
-                        Sign Out
+                        Keluar dari akun
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
@@ -67,8 +67,7 @@
                                         data-toggle="dropdown">
                                         <img src="/images/icon-user.png" alt=""
                                             class="rounded-circle mr-2 profile-picture" />
-                                        {{-- Hi, {{ Auth::user()->name }} --}}
-                                        Hi, Admin
+                                        Halo, {{ Auth::user()->name }}
                                     </a>
                                     <div class="dropdown-menu">
                                         {{-- <a href="" class="dropdown-item">Dashboard</a> --}}
@@ -88,23 +87,28 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('cart') }}" class="nav-link d-inline-block mt-2">
-                                        {{-- @php --}}
-                                        // $carts = \App\Models\Cart::where('users_id', Auth::user()->id)->count();
-                                        // @endphp
-                                        {{-- @if ($carts > 0) --}}
-                                        <img src="/images/icon-cart-filled.svg" alt="" />
-                                        <div class="cart-badge">0</div>
-                                        {{-- @else --}}
-                                        {{-- <img src="/images/icon-cart-empty.svg" alt="" /> --}}
-                                        {{-- @endif --}}
+                                        @php
+                                            $carts = \App\Models\Cart::where('users_id', Auth::user()->id)->count();
+                                        @endphp
+                                        @if ($carts > 0)
+                                            <img src="/images/icon-cart-filled.svg" alt="" />
+                                            <div class="cart-badge">0</div>
+                                        @else
+                                            <img src="/images/icon-cart-empty.svg" alt="" />
+                                        @endif
                                     </a>
                                 </li>
                             </ul>
 
                             <ul class="navbar-nav d-block d-lg-none">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
-                                        {{-- Hi, {{ Auth::user()->name }} --}}
+                                    <a href="{{ route('dashboard-account') }}" class="nav-link">
+                                        Halo, {{ Auth::user()->name }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('home') }}" class="nav-link d-inline-block">
+                                        Home
                                     </a>
                                 </li>
                                 <li class="nav-item">

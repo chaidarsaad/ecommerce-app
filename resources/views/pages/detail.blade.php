@@ -64,12 +64,12 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
-                                        Add to Cart
+                                        Tambah ke keranjang
                                     </button>
                                 </form>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-success px-4 text-white btn-block mb-3">
-                                    Sign in to Add
+                                    Login untuk tambah ke keranjang
                                 </a>
                             @endauth
                         </div>
@@ -159,4 +159,17 @@
             },
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session('status'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Produk ini sudah ada di keranjangmu',
+            })
+        </script>
+    @endif
+
 @endpush

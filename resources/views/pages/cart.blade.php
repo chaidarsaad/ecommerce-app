@@ -13,7 +13,7 @@
                     <div class="col-12">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
                                     Cart
                                 </li>
@@ -37,60 +37,41 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td style="width: 25%;">
-                                        <img src="/images/product-cart-1.jpg" alt="" class="cart-image" />
-                                    </td>
-                                    <td style="width: 35%;">
-                                        <div class="product-title">Sofa Ternyaman</div>
-                                        <div class="product-subtitle">by Andi Sukka</div>
-                                    </td>
-                                    <td style="width: 35%;">
-                                        <div class="product-title">$29,112</div>
-                                        <div class="product-subtitle">USD</div>
-                                    </td>
-                                    <td style="width: 20%;">
-                                        <a href="#" class="btn btn-remove-cart">
-                                            Remove
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 25%;">
-                                        <img src="/images/product-cart-2.jpg" alt="" class="cart-image" />
-                                    </td>
-                                    <td style="width: 25%;">
-                                        <div class="product-title">Sneaker</div>
-                                        <div class="product-subtitle">by BuildWith Angga</div>
-                                    </td>
-                                    <td style="width: 25%;">
-                                        <div class="product-title">$80,309</div>
-                                        <div class="product-subtitle">USD</div>
-                                    </td>
-                                    <td style="width: 25%;">
-                                        <a href="#" class="btn btn-remove-cart">
-                                            Remove
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 25%;">
-                                        <img src="/images/product-cart-3.jpg" alt="" class="cart-image" />
-                                    </td>
-                                    <td style="width: 25%;">
-                                        <div class="product-title">Coffee Holder</div>
-                                        <div class="product-subtitle">by Addictex</div>
-                                    </td>
-                                    <td style="width: 25%;">
-                                        <div class="product-title">$13,492</div>
-                                        <div class="product-subtitle">USD</div>
-                                    </td>
-                                    <td style="width: 25%;">
-                                        <a href="#" class="btn btn-remove-cart">
-                                            Remove
-                                        </a>
-                                    </td>
-                                </tr>
+                                @php $totalPrice = 0 @endphp
+                                @forelse ($carts as $cart)
+                                    <tr>
+                                        <td style="width: 20%;">
+                                            @if ($cart->product->galleries->count())
+                                                <img src="{{ Storage::url($cart->product->galleries->first()->photos) }}"
+                                                    alt="" class="cart-image" />
+                                            @endif
+                                        </td>
+                                        <td style="width: 35%;">
+                                            <div class="product-title">{{ $cart->product->name }}</div>
+                                            <div class="product-subtitle">by asdkajkdh</div>
+                                        </td>
+                                        <td style="width: 35%;">
+                                            <div class="product-title">Rp {{ number_format($cart->product->price) }}</div>
+                                            <div class="product-subtitle">Rp</div>
+                                        </td>
+                                        <td style="width: 20%;">
+                                            <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="btn btn-remove-cart" type="submit">
+                                                    Remove
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @php $totalPrice += $cart->product->price @endphp
+                                @empty
+                                    <tr>
+                                        <td>
+                                            <h6 style="" class="">Keranjang Kosong</h6>
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -100,22 +81,15 @@
                         <hr />
                     </div>
                     <div class="col-12">
-                        <h2 class="mb-4">Shipping Details</h2>
+                        <h2 class="mb-4">Detail Pengiriman</h2>
                     </div>
                 </div>
                 <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
-                            <label for="addressOne">Address 1</label>
-                            <input type="text" class="form-control" id="addressOne" aria-describedby="emailHelp"
-                                name="addressOne" value="Setra Duta Cemara" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="addressTwo">Address 2</label>
-                            <input type="text" class="form-control" id="addressTwo" aria-describedby="emailHelp"
-                                name="addressTwo" value="Blok B2 No. 34" />
+                            <label for="addressOne">Alamat Lengkap</label>
+                            <input type="text" class="form-control" id="addressOne" name="addressOne"
+                                value="Setra Duta Cemara" />
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -137,15 +111,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="postalCode">Postal Code</label>
-                            <input type="text" class="form-control" id="postalCode" name="postalCode"
-                                value="40512" />
+                            <input type="text" class="form-control" id="postalCode" name="postalCode" value="40512" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="country">Country</label>
-                            <input type="text" class="form-control" id="country" name="country"
-                                value="Indonesia" />
+                            <input type="text" class="form-control" id="country" name="country" value="Indonesia" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -156,16 +128,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" data-aos="fade-up" data-aos-delay="150">
+                {{-- <div class="row" data-aos="fade-up" data-aos-delay="150">
                     <div class="col-12">
                         <hr />
                     </div>
                     <div class="col-12">
                         <h2>Payment Informations</h2>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row" data-aos="fade-up" data-aos-delay="200">
-                    <div class="col-4 col-md-2">
+                    {{-- <div class="col-4 col-md-2">
                         <div class="product-title">$10</div>
                         <div class="product-subtitle">Country Tax</div>
                     </div>
@@ -178,12 +150,12 @@
                         <div class="product-subtitle">Ship to Jakarta</div>
                     </div>
                     <div class="col-4 col-md-2">
-                        <div class="product-title text-success">$392,409</div>
+                        <div class="product-title text-success">Rp {{ number_format($totalPrice ?? 0) }}</div>
                         <div class="product-subtitle">Total</div>
-                    </div>
-                    <div class="col-8 col-md-3">
+                    </div> --}}
+                    <div class="col-12 col-md-12">
                         <a href="{{ route('success') }}" class="btn btn-success mt-4 px-4 btn-block">
-                            Checkout Now
+                            Lanjut ke Pembayaran
                         </a>
                     </div>
                 </div>
@@ -191,3 +163,27 @@
         </section>
     </div>
 @endsection
+
+@push('addon-script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session('suksesdel'))
+        <script>
+            Swal.fire(
+                'Produk Berhasil dihapus',
+                '',
+                'success'
+            )
+        </script>
+    @endif
+
+    @if (session('suksesadd'))
+        <script>
+            Swal.fire(
+                'Produk Berhasil ditambahkan ke keranjangmu',
+                '',
+                'success'
+            )
+        </script>
+    @endif
+@endpush

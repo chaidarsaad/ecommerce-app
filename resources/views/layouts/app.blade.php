@@ -17,7 +17,12 @@
 
 <body>
     {{-- navigation --}}
-    @include('includes.navbar')
+    @if (Auth::check())
+        @include('includes.navbar')
+    @else
+        @include('includes.navbar-authenticated')
+    @endif
+    {{-- @include('includes.navbar') --}}
 
     <!-- Page Content -->
     @yield('content')
