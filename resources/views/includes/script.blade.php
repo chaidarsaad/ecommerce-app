@@ -6,4 +6,6 @@
     AOS.init();
 </script>
 <script src="/script/navbar-scroll.js"></script>
+<script src="https://kit.fontawesome.com/67a4b1b387.js" crossorigin="anonymous"></script>
+
 
