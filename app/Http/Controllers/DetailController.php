@@ -53,7 +53,7 @@ class DetailController extends Controller
 
             return redirect()->route('wishlist')->with('suksesadd', "Produk berhasil ditambahkan ke keranjangmu");
         } catch (Exception $e) {
-            return back()->with('status', "Produk ini sudah ada di keranjangmu");
+            return back()->with('statuswishlist', "Produk ini sudah ada di keranjangmu");
         }
     }
 }

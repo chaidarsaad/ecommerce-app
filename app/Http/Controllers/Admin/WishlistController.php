@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Exception;
+use App\Models\Cart;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -42,6 +43,22 @@ class WishlistController extends Controller
             ];
 
             Wishlist::create($data);
+
+            return redirect()->route('cart')->with('suksesadd', "Produk berhasil ditambahkan ke keranjangmu");
+        } catch (Exception $e) {
+            return back()->with('status', "Produk ini sudah ada di keranjangmu");
+        }
+    }
+
+    public function addtocart(Request $request, $id)
+    {
+        try {
+            $data = [
+                'products_id' => $id,
+                'users_id' => Auth::user()->id
+            ];
+
+            Cart::create($data);
 
             return redirect()->route('cart')->with('suksesadd', "Produk berhasil ditambahkan ke keranjangmu");
         } catch (Exception $e) {

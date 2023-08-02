@@ -23,8 +23,9 @@ Route::get('/categories/{id}', [ControllersCategoryController::class, 'detail'])
 
 Route::get('/details/{id}', [DetailController::class, 'index'])->name('detail');
 Route::post('/details/{id}', [DetailController::class, 'add'])->name('detail-add');
-Route::post('/wishlist/{id}', [DetailController::class, 'wishlist'])->name('detail-wishlist');
 
+Route::post('/wishlist/{id}', [DetailController::class, 'wishlist'])->name('detail-wishlist');
+Route::post('/wishlist/{id}', [WishlistController::class, 'addtocart'])->name('wishlist-addtocart');
 
 Route::get('/success', [CartController::class, 'success'])->name('success');
 
@@ -47,7 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 // ->middleware(['auth', 'admin'])
 // ->namespace('Admin')
-Route::prefix('admin')->middleware(['auth', 'admin'])->middleware(['auth', 'admin'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'IsAdmin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin-dashboard');
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);

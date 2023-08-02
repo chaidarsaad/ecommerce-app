@@ -83,11 +83,9 @@
                                 <div class="products-thumbnail">
                                     <div class="products-image"
                                         style="
-                                        @if($product->galleries->count())
-                                            background-image: url('{{ Storage::url($product->galleries->first()->photos) }}');
+                                        @if ($product->galleries->count()) background-image: url('{{ Storage::url($product->galleries->first()->photos) }}');
                                         @else
-                                            background-color: #eee;
-                                        @endif
+                                            background-color: #eee; @endif
                                     ">
                                     </div>
                                 </div>
@@ -108,6 +106,19 @@
             </div>
         </section>
         {{-- end new products --}}
-        
+
     </div>
 @endsection
+
+@push('addon-script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('home'))
+        <script>
+            Swal.fire(
+                'Login Berhasil',
+                '',
+                'success'
+            )
+        </script>
+    @endif
+@endpush

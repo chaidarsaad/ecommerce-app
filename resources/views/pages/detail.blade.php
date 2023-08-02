@@ -179,4 +179,14 @@
         </script>
     @endif
 
+    @if (session('statuswishlist'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Produk ini sudah ada di favorit',
+            })
+        </script>
+    @endif
+
 @endpush

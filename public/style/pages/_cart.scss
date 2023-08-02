@@ -30,5 +30,11 @@
 
       @include button-variant(#fc5e84, transparent);
     }
+
+    .btn-successs {
+      margin-top: 18px;
+      @include button-variant(#fc5e84, transparent);
+
+    }
   }
 }

@@ -11048,6 +11048,48 @@ footer p {
           box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
 }
 
+/*  */
+.store-cart .table-cart .btn-add-cart {
+  margin-top: 18px;
+  color: #fff;
+  background-color: #008000;
+  border-color: transparent;
+}
+
+.store-cart .table-cart .btn-add-cart:hover {
+  color: #fff;
+  background-color: #008000;
+  border-color: rgba(0, 0, 0, 0);
+}
+
+.store-cart .table-cart .btn-add-cart:focus, .store-cart .table-cart .btn-add-cart.focus {
+  color: #fff;
+  background-color: #008000;
+  border-color: rgba(0, 0, 0, 0);
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+          box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+
+.store-cart .table-cart .btn-add-cart.disabled, .store-cart .table-cart .btn-add-cart:disabled {
+  color: #fff;
+  background-color: #008000;
+  border-color: transparent;
+}
+
+.store-cart .table-cart .btn-add-cart:not(:disabled):not(.disabled):active, .store-cart .table-cart .btn-add-cart:not(:disabled):not(.disabled).active,
+.show > .store-cart .table-cart .btn-add-cart.dropdown-toggle {
+  color: #fff;
+  background-color: #008000;
+  border-color: rgba(0, 0, 0, 0);
+}
+
+.store-cart .table-cart .btn-add-cart:not(:disabled):not(.disabled):active:focus, .store-cart .table-cart .btn-add-cart:not(:disabled):not(.disabled).active:focus,
+.show > .store-cart .table-cart .btn-add-cart.dropdown-toggle:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+          box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+/*  */
+
 .page-auth .row-login {
   min-height: 70vh;
 }

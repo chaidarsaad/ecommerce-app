@@ -30,9 +30,9 @@
                         <table class="table table-borderless table-cart" aria-describedby="Cart">
                             <thead>
                                 <tr>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Name &amp; Seller</th>
-                                    <th scope="col">Price</th>
+                                    <th scope="col">Foto</th>
+                                    <th scope="col">Nama &amp; Harga</th>
+                                    <th scope="col">Keranjang</th>
                                     <th scope="col">Menu</th>
                                 </tr>
                             </thead>
@@ -48,11 +48,16 @@
                                         </td>
                                         <td style="width: 35%;">
                                             <div class="product-title">{{ $wishlists->product->name }}</div>
-                                            <div class="product-subtitle">by asdkajkdh</div>
+                                            <div class="product-subtitle">Rp {{ number_format($wishlists->product->price) }}
+                                            </div>
                                         </td>
                                         <td style="width: 35%;">
-                                            <div class="product-title">Rp {{ number_format($wishlists->product->price) }}</div>
-                                            <div class="product-subtitle">Rp</div>
+                                            <form action="{{ route('wishlist-addtocart', $wishlists->id) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-add-cart" type="submit">
+                                                    Tambah ke keranjang
+                                                </button>
+                                            </form>
                                         </td>
                                         <td style="width: 20%;">
                                             <form action="{{ route('wishlist-delete', $wishlists->id) }}" method="POST">

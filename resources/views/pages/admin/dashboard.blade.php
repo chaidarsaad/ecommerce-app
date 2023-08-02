@@ -4,6 +4,10 @@
     Store Dashboard Admin Page
 @endsection
 
+@push('addon-style')
+    <link rel="stylesheet" href="assets/extensions/sweetalert2/sweetalert2.min.css">
+@endpush
+
 @section('content')
     <!-- Page Content -->
     <div class="page-heading">
@@ -325,3 +329,7 @@
         </section>
     </div>
 @endsection
+
+@push('addon-script')
+  
+@endpush
