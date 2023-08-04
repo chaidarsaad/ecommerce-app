@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Exception;
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,9 +18,11 @@ class WishlistController extends Controller
     public function index()
     {
         $wishlist = Wishlist::with(['product.galleries', 'user'])->where('users_id', Auth::user()->id)->get();
+        // $addcart = Product::with(['galleries'])->where('slug')->firstOrFail();
 
         return view('pages.wishlist', [
             'wishlist' => $wishlist
+            // 'addcart' => $addcart
         ]);
     }
 
@@ -34,7 +37,7 @@ class WishlistController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         try {
             $data = [
@@ -42,9 +45,9 @@ class WishlistController extends Controller
                 'users_id' => Auth::user()->id
             ];
 
-            Wishlist::create($data);
+            Cart::create($data);
 
-            return redirect()->route('wishlist')->with('suksesadd', "Produk berhasil ditambahkan ke keranjangmu");
+            return redirect()->route('cart')->with('suksesadd', "Produk berhasil ditambahkan ke keranjangmu");
         } catch (Exception $e) {
             return back()->with('status', "Produk ini sudah ada di keranjangmu");
         }

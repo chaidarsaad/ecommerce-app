@@ -30,9 +30,9 @@
                         <table class="table table-borderless table-cart" aria-describedby="Cart">
                             <thead>
                                 <tr>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Name &amp; Seller</th>
-                                    <th scope="col">Price</th>
+                                    <th scope="col">Foto</th>
+                                    <th scope="col">Produk &amp; Harga</th>
+                                    <th scope="col">Jumlah</th>
                                     <th scope="col">Menu</th>
                                 </tr>
                             </thead>
@@ -48,7 +48,7 @@
                                         </td>
                                         <td style="width: 35%;">
                                             <div class="product-title">{{ $cart->product->name }}</div>
-                                            <div class="product-subtitle">by asdkajkdh</div>
+                                            <div class="product-subtitle">Rp {{ number_format($cart->product->price) }}</div>
                                         </td>
                                         <td style="width: 35%;">
                                             <div class="product-title">Rp {{ number_format($cart->product->price) }}</div>

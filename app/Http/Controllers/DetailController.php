@@ -41,7 +41,7 @@ class DetailController extends Controller
         }
     }
 
-    public function wishlist(Request $request, $id)
+    public function addfav(Request $request, $id)
     {
         try {
             $data = [

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,7 @@ class CartController extends Controller
         $carts = Cart::with(['product.galleries', 'user'])->where('users_id', Auth::user()->id)->get();
 
         return view('pages.cart', [
-            'carts' => $carts
+            'carts' => $carts,
         ]);
     }
 

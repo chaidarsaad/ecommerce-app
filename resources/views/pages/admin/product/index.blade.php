@@ -54,7 +54,7 @@
                                     <div class="modal-body">
                                         <label>Nama Produk</label>
                                         <div class="form-group">
-                                            <input name="name" type="text" placeholder="Nama Kategori"
+                                            <input name="name" type="text" placeholder="Nama Produk"
                                                 class="form-control" required>
                                         </div>
 

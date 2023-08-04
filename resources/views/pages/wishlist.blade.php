@@ -15,7 +15,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Cart
+                                    Favorit
                                 </li>
                             </ol>
                         </nav>
@@ -52,10 +52,10 @@
                                             </div>
                                         </td>
                                         <td style="width: 35%;">
-                                            <form action="{{ route('wishlist-addtocart', $wishlists->id) }}" method="POST">
+                                            <form action="#">
                                                 @csrf
                                                 <button class="btn btn-add-cart" type="submit">
-                                                    Tambah ke keranjang
+                                                    Tambah
                                                 </button>
                                             </form>
                                         </td>
