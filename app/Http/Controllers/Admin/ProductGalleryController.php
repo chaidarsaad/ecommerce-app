@@ -42,7 +42,7 @@ class ProductGalleryController extends Controller
 
         ProductGallery::create($data);
 
-        return redirect()->route('gallery.index');
+        return redirect()->route('gallery.index')->with('add-galeri', "sukses");
     }
 
     /**
@@ -77,6 +77,6 @@ class ProductGalleryController extends Controller
         $item = ProductGallery::findorFail($id);
         $item->delete();
 
-        return redirect()->route('gallery.index');
+        return redirect()->route('gallery.index')->with('delete-galeri', "sukses");
     }
 }

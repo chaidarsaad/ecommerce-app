@@ -1,11 +1,10 @@
 @extends('layouts.admin')
 
 @section('title')
-    Store Edit Produk Page
+    Store Edit Akun Page
 @endsection
 
 @push('addon-style')
-    <link rel="stylesheet" href="/assets/extensions/toastify-js/src/toastify.css" />
 @endpush
 
 @section('content')
@@ -14,14 +13,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Produk</h3>
-                    <p class="text-subtitle text-muted">Edit Produk {{ $item->name }}</p>
+                    <h3>Category</h3>
+                    <p class="text-subtitle text-muted">Edit Akun {{ $item->name }}</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin-dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit Produk</li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Akun</li>
                         </ol>
                     </nav>
                 </div>
@@ -30,10 +29,10 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <a class="btn btn-primary" href="{{ route('product.index') }}">Kembali</a>
+                    <a class="btn btn-primary" href="{{ route('account.index') }}">Kembali</a>
                 </div>
 
-                <form action="{{ route('product.update', $item->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('account.update', $item->id) }}" method="post" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="card-body">
@@ -49,40 +48,35 @@
                             @endif
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name">Nama Produk</label>
-                                    <input name="name" type="text" class="form-control" id="name" required
-                                        value="{{ $item->name }}">
+                                    <label>Nama User</label>
+                                    <input type="text" class="form-control" name="name" value="{{ $item->name }}"
+                                        required />
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="categories_id ">Kategori Produk</label>
-                                    <select name="categories_id" class="form-control" required>
-                                        <option value="{{ $item->categories_id }}">{{ $item->category->name }}</option>
-                                        <option value="" disabled>Pilih Kategori</option>
-                                        @foreach ($categories as $categories)
-                                            <option value="{{ $categories->id }}">{{ $categories->name }}</option>
-                                        @endforeach
+                                    <label>Email User</label>
+                                    <input type="text" class="form-control" name="email" value="{{ $item->email }}"
+                                        required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Password User</label>
+                                    <input type="text" class="form-control" name="password" />
+                                    <small>Kosongkan jika tidak ingin mengganti password</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Roles</label>
+                                    <select name="roles" required class="form-control">
+                                        <option value="{{ $item->roles }}" selected>Tidak diganti</option>
+                                        <option value="ADMIN">Admin</option>
+                                        <option value="USER">User</option>
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="price">Harga Produk</label>
-                                    <input name="price" type="number" class="form-control" id="price" required
-                                        value="{{ $item->price }}">
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="description">Nama Category</label>
-                                    <textarea name="description" id="editor">{!! $item->description !!}</textarea>
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <div class="col text-right">
                                     <button type="submit" class="btn btn-primary px-5">
@@ -99,23 +93,4 @@
 @endsection
 
 @push('addon-script')
-    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor');
-    </script>
-
-    <script src="/assets/extensions/toastify-js/src/toastify.js"></script>
-    <script src="/assets/js/pages/toastify.js"></script>
-    @if (session('failed-add'))
-        <script>
-            Toastify({
-                text: "Produk Sudah Ada",
-                duration: 7000,
-                close: true,
-                gravity: "top",
-                position: "center",
-                backgroundColor: "#FF0000",
-            }).showToast();
-        </script>
-    @endif
 @endpush

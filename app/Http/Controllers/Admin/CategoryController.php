@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Exception;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -34,14 +35,18 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $data = $request->all();
+        try {
+            $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+            $data['slug'] = Str::slug($request->name);
+            $data['photo'] = $request->file('photo')->store('assets/category', 'public');
 
-        Category::create($data);
+            Category::create($data);
 
-        return redirect()->route('category.index');
+            return redirect()->route('category.index')->with('add-category', "sukses");
+        } catch (\Exception $e) {
+            return back()->with('failed-add', "sukses");
+        }
     }
 
     /**
@@ -69,20 +74,24 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, string $id)
     {
-        $data = $request->all();
+        try {
+            $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
-        // $data['photo'] = $request->file('photo')->store('assets/category', 'public');
-        if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+            $data['slug'] = Str::slug($request->name);
+            // $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+            if ($request->hasFile('photo')) {
+                $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+            }
+
+
+            $item = Category::findOrFail($id);
+
+            $item->update($data);
+
+            return redirect()->route('category.index')->with('update-category', "sukses");
+        } catch (\Exception $e) {
+            return back()->with('failed-add', "sukses");
         }
-
-
-        $item = Category::findOrFail($id);
-
-        $item->update($data);
-
-        return redirect()->route('category.index');
     }
 
     /**
@@ -92,6 +101,6 @@ class CategoryController extends Controller
     {
         $item = Category::findOrFail($id);
         $item->delete();
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('delete-category', "sukses");
     }
 }

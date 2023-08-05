@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/assets/css/pages/fontawesome.css">
     <link rel="stylesheet" href="/assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="/assets/css/pages/datatables.css">
+    <link rel="stylesheet" href="/assets/extensions/toastify-js/src/toastify.css" />
 @endpush
 
 @section('content')
@@ -103,22 +104,13 @@
                                     </th>
                                     <th>
                                         <div class="btn-group mb-1">
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle me-1" type="button"
-                                                    id="action' .  $item->id . '" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                    Aksi
+                                            <form action="{{ route('gallery.destroy', $item->id) }}" method="POST">
+                                                {{ method_field('delete') }}
+                                                {{ csrf_field() }}
+                                                <button class="btn btn-danger" type="submit">
+                                                    Hapus
                                                 </button>
-                                                <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                                    <form action="{{ route('gallery.destroy', $item->id) }}" method="POST">
-                                                        {{ method_field('delete') }}
-                                                        {{ csrf_field() }}
-                                                        <button class="dropdown-item text-danger" type="submit">
-                                                            Hapus
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </th>
                                 </tr>
@@ -138,4 +130,31 @@
     <script>
         let jquery_datatable = $("#table1").DataTable();
     </script>
+
+    <script src="/assets/extensions/toastify-js/src/toastify.js"></script>
+    <script src="/assets/js/pages/toastify.js"></script>
+    @if (session('delete-galeri'))
+        <script>
+            Toastify({
+                text: "Foto Berhasil Dihapus",
+                duration: 7000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#4fbe87",
+            }).showToast();
+        </script>
+    @endif
+    @if (session('add-galeri'))
+        <script>
+            Toastify({
+                text: "Berhasil Menambah Foto",
+                duration: 7000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#4fbe87",
+            }).showToast();
+        </script>
+    @endif
 @endpush

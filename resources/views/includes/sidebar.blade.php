@@ -78,8 +78,8 @@
                         <span>Pesanan</span>
                     </a>
                 </li>
-                <li class="sidebar-item ">
-                    <a href="{{ route('category.index') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->is('admin/account') ? 'active' : '' }}">
+                    <a href="{{ route('account.index') }}" class='sidebar-link'>
                         <i class="bi bi-person-fill"></i>
                         <span>Akun</span>
                     </a>

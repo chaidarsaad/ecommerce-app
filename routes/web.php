@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\DashboardAccountController;
 use App\Http\Controllers\Admin\ProductGalleryController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WishlistController;
 use App\Http\Controllers\CategoryController as ControllersCategoryController;
 use App\Http\Controllers\DashboardController as ControllersDashboardController;
@@ -52,6 +53,7 @@ Route::prefix('admin')->middleware(['auth', 'IsAdmin'])->group(function () {
     Route::resource('product', ProductController::class);
     Route::resource('gallery', ProductGalleryController::class);
     Route::resource('transaction', TransactionController::class);
+    Route::resource('account', UserController::class);
 });
 
 Auth::routes();

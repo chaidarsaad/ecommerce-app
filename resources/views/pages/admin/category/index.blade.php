@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/assets/css/pages/fontawesome.css">
     <link rel="stylesheet" href="/assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="/assets/css/pages/datatables.css">
+    <link rel="stylesheet" href="/assets/extensions/toastify-js/src/toastify.css" />
 @endpush
 
 @section('content')
@@ -139,4 +140,55 @@
     <script>
         let jquery_datatable = $("#table1").DataTable();
     </script>
+
+    <script src="/assets/extensions/toastify-js/src/toastify.js"></script>
+    <script src="/assets/js/pages/toastify.js"></script>
+    @if (session('delete-category'))
+        <script>
+            Toastify({
+                text: "Kategori Berhasil Dihapus",
+                duration: 7000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#4fbe87",
+            }).showToast();
+        </script>
+    @endif
+    @if (session('add-category'))
+        <script>
+            Toastify({
+                text: "Berhasil Menambah Kategori",
+                duration: 7000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#4fbe87",
+            }).showToast();
+        </script>
+    @endif
+    @if (session('update-category'))
+        <script>
+            Toastify({
+                text: "Berhasil Diupdate",
+                duration: 7000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#4fbe87",
+            }).showToast();
+        </script>
+    @endif
+    @if (session('failed-add'))
+        <script>
+            Toastify({
+                text: "Kategori Yang Ditambahkan Sudah Ada",
+                duration: 7000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#FF0000",
+            }).showToast();
+        </script>
+    @endif
 @endpush

@@ -5,6 +5,7 @@
 @endsection
 
 @push('addon-style')
+    <link rel="stylesheet" href="/assets/extensions/toastify-js/src/toastify.css" />
 @endpush
 
 @section('content')
@@ -32,7 +33,7 @@
                     <a class="btn btn-primary" href="{{ route('category.index') }}">Kembali</a>
                 </div>
 
-                <form action="{{ route('category.update',$item->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('category.update', $item->id) }}" method="post" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="card-body">
@@ -78,4 +79,18 @@
 @endsection
 
 @push('addon-script')
+    <script src="/assets/extensions/toastify-js/src/toastify.js"></script>
+    <script src="/assets/js/pages/toastify.js"></script>
+    @if (session('failed-add'))
+        <script>
+            Toastify({
+                text: "Kategori Sudah Ada",
+                duration: 7000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#FF0000",
+            }).showToast();
+        </script>
+    @endif
 @endpush

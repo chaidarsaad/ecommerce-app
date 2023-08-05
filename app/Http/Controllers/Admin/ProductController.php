@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Exception;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\ProductGallery;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductRequest;
-use App\Models\ProductGallery;
 
 class ProductController extends Controller
 {
@@ -38,10 +39,14 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
-        Product::create($data);
-        return redirect()->route('product.index');
+        try {
+            $data = $request->all();
+            $data['slug'] = Str::slug($request->name);
+            Product::create($data);
+            return redirect()->route('product.index')->with('add-produk', "sukses");
+        } catch (\Exception $e) {
+            return back()->with('failed-add', "sukses");
+        }
     }
 
     /**
@@ -65,8 +70,8 @@ class ProductController extends Controller
     {
         $item = Product::with(['category'])->findOrFail($id);
         $categories = Category::all();
-        
-        return view('pages.admin.product.edit',[
+
+        return view('pages.admin.product.edit', [
             'item' => $item,
             'categories' => $categories
         ]);
@@ -77,15 +82,19 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, string $id)
     {
-        $data = $request->all();
+        try {
+            $data = $request->all();
 
-        $item = Product::findOrFail($id);
+            $item = Product::findOrFail($id);
 
-        $data['slug'] = Str::slug($request->name);
+            $data['slug'] = Str::slug($request->name);
 
-        $item->update($data);
+            $item->update($data);
 
-        return redirect()->route('product.index');
+            return redirect()->route('product.index')->with('update-produk', "sukses");
+        } catch (\Exception $e) {
+            return back()->with('failed-add', "sukses");
+        }
     }
 
     /**
@@ -96,6 +105,6 @@ class ProductController extends Controller
         $item = Product::findorFail($id);
         $item->delete();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('delete-produk', "sukses");
     }
 }

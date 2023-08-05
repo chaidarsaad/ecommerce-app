@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/assets/css/pages/fontawesome.css">
     <link rel="stylesheet" href="/assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="/assets/css/pages/datatables.css">
+    <link rel="stylesheet" href="/assets/extensions/toastify-js/src/toastify.css" />
 @endpush
 
 @section('content')
@@ -164,4 +165,55 @@
     <script>
         CKEDITOR.replace('editor');
     </script>
+
+    <script src="/assets/extensions/toastify-js/src/toastify.js"></script>
+    <script src="/assets/js/pages/toastify.js"></script>
+    @if (session('delete-produk'))
+        <script>
+            Toastify({
+                text: "Produk Berhasil Dihapus",
+                duration: 7000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#4fbe87",
+            }).showToast();
+        </script>
+    @endif
+    @if (session('add-produk'))
+        <script>
+            Toastify({
+                text: "Berhasil Menambah Produk",
+                duration: 7000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#4fbe87",
+            }).showToast();
+        </script>
+    @endif
+    @if (session('update-produk'))
+        <script>
+            Toastify({
+                text: "Produk Berhasil Diupdate",
+                duration: 7000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#4fbe87",
+            }).showToast();
+        </script>
+    @endif
+    @if (session('failed-add'))
+        <script>
+            Toastify({
+                text: "Produk Yang Ditambahkan Sudah Ada",
+                duration: 7000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#FF0000",
+            }).showToast();
+        </script>
+    @endif
 @endpush
