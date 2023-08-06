@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -30,6 +31,22 @@ class CartController extends Controller
         $cart->delete();
 
         return redirect()->route('cart')->with('suksesdel', "Produk Berhasil dihapus");
+    }
+
+    public function update(Request $request, string $id)
+    {
+        try {
+            $cart = Cart::findOrFail($id);
+            $cart->quantity = $request->input('quantity');
+            $cart->update();
+            return redirect()->route('cart');
+        } catch (\Exception $e) {
+            $cart = Cart::findOrFail($id);
+
+            $cart->delete();
+
+            return redirect()->route('cart');
+        }
     }
 
     public function success()

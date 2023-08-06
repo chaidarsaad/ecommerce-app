@@ -25,7 +25,7 @@
                 <li class="nav-item {{ request()->is('categories') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('categories') }}">Kategori</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('wishlist') }}">
 
                         @php
@@ -38,7 +38,7 @@
                             <i class="fa-solid fa-heart fa-xl"></i>
                         @endif
                     </a>
-                </li>
+                </li> --}}
                 @guest
                     <li class="nav-item">
                         <a href="{{ route('register') }}" class="nav-link">Daftar</a>

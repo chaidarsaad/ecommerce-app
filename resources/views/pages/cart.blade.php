@@ -48,23 +48,32 @@
                                         </td>
                                         <td style="width: 35%;">
                                             <div class="product-title">{{ $cart->product->name }}</div>
-                                            <div class="product-subtitle">Rp {{ number_format($cart->product->price) }}</div>
+                                            <div class="product-subtitle">Rp {{ number_format($cart->product->price) }}
+                                            </div>
                                         </td>
                                         <td style="width: 35%;">
-                                            <div class="product-title">Rp {{ number_format($cart->product->price) }}</div>
-                                            <div class="product-subtitle">Rp</div>
+                                            <form action="{{ route('cart-update', $cart->id) }}"  method="POST" enctype="multipart/form-data">
+                                                @method('PUT')
+                                                @csrf
+                                                <div class="input-group text-center" style="width:130px; margin-top: 18px">
+                                                    <input type="number" name="quantity"
+                                                        class="form-control qty-input text-center"
+                                                        value="{{ $cart->quantity }}" style="width: 30px">
+                                                    <button type="submit" class="btn btn-success">Simpan</button>
+                                                </div>
+                                            </form>
                                         </td>
                                         <td style="width: 20%;">
                                             <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="btn btn-remove-cart" type="submit">
-                                                    Remove
+                                                    <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </form>
                                         </td>
                                     </tr>
-                                    @php $totalPrice += $cart->product->price @endphp
+                                    @php $totalPrice += $cart->product->price * $cart->quantity @endphp
                                 @empty
                                     <tr>
                                         <td>
@@ -128,31 +137,31 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="row" data-aos="fade-up" data-aos-delay="150">
+                <div class="row" data-aos="fade-up" data-aos-delay="150">
                     <div class="col-12">
                         <hr />
                     </div>
                     <div class="col-12">
-                        <h2>Payment Informations</h2>
+                        <h2>Rincian Harga</h2>
                     </div>
-                </div> --}}
+                </div>
                 <div class="row" data-aos="fade-up" data-aos-delay="200">
-                    {{-- <div class="col-4 col-md-2">
+                    {{-- <div class="col-4 col-md-3">
                         <div class="product-title">$10</div>
                         <div class="product-subtitle">Country Tax</div>
                     </div>
                     <div class="col-4 col-md-3">
                         <div class="product-title">$280</div>
                         <div class="product-subtitle">Product Insurance</div>
-                    </div>
-                    <div class="col-4 col-md-2">
+                    </div> --}}
+                    <div class="col-4 col-md-6">
                         <div class="product-title">$580</div>
                         <div class="product-subtitle">Ship to Jakarta</div>
                     </div>
-                    <div class="col-4 col-md-2">
+                    <div class="col-4 col-md-6">
                         <div class="product-title text-success">Rp {{ number_format($totalPrice ?? 0) }}</div>
                         <div class="product-subtitle">Total</div>
-                    </div> --}}
+                    </div>
                     <div class="col-12 col-md-12">
                         <a href="{{ route('success') }}" class="btn btn-success mt-4 px-4 btn-block">
                             Lanjut ke Pembayaran

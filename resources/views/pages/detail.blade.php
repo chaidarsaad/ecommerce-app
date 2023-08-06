@@ -67,13 +67,13 @@
                                         Tambah ke keranjang
                                     </button>
                                 </form>
-                                <form action="{{ route('detail-fav', $product->id) }}" method="POST"
+                                {{-- <form action="{{ route('detail-fav', $product->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
                                         Tambah ke Favorit
                                     </button>
-                                </form>
+                                </form> --}}
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-success px-4 text-white btn-block mb-3">
                                     Login untuk tambah ke keranjang

@@ -24,7 +24,7 @@ Route::get('/categories/{id}', [ControllersCategoryController::class, 'detail'])
 
 Route::get('/details/{id}', [DetailController::class, 'index'])->name('detail');
 Route::post('/details/{id}', [DetailController::class, 'add'])->name('detail-add'); //add to cart
-Route::post('/whislist/{id}', [DetailController::class, 'addfav'])->name('detail-fav'); //add to wishlist
+// Route::post('/whislist/{id}', [DetailController::class, 'addfav'])->name('detail-fav'); //add to wishlist
 
 Route::get('/success', [CartController::class, 'success'])->name('success');
 
@@ -33,10 +33,11 @@ Route::get('/register/success', [RegisterController::class, 'success'])->name('r
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::delete('/cart/{id}', [CartController::class, 'delete'])->name('cart-delete');
+    Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart-update');
 
-    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
-    Route::post('/wishlist/{id}', [WishlistController::class, 'store'])->name('wishlist-cart');
-    Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist-delete');
+    // Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
+    // Route::post('/wishlist/{id}', [WishlistController::class, 'store'])->name('wishlist-cart');
+    // Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist-delete');
 
     Route::get('/dashboard', [ControllersDashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/transactions', [DashboardTransactionController::class, 'index'])->name('dashboard-transaction');

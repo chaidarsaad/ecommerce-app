@@ -25,12 +25,14 @@ class DetailController extends Controller
         ]);
     }
 
+    // add to cart
     public function add(Request $request, $id)
     {
         try {
             $data = [
                 'products_id' => $id,
-                'users_id' => Auth::user()->id
+                'users_id' => Auth::user()->id,
+                'quantity' => 1
             ];
 
             Cart::create($data);
@@ -41,6 +43,7 @@ class DetailController extends Controller
         }
     }
 
+    // add to favorit
     public function addfav(Request $request, $id)
     {
         try {

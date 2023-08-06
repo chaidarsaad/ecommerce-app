@@ -52,7 +52,7 @@
                                             </div>
                                         </td>
                                         <td style="width: 35%;">
-                                            <form action="#">
+                                            <form action="{{ route('wishlist-cart', $wishlists->id) }}" method="POST">
                                                 @csrf
                                                 <button class="btn btn-add-cart" type="submit">
                                                     Tambah
